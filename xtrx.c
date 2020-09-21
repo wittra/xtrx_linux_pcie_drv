@@ -177,9 +177,9 @@ MODULE_VERSION("0.1");
  * mmaped to userspce. Convertion DMA->PA->VA does the trick on that
  * platforms
  */
-#ifdef CONFIG_CPU_RK3399
+//#ifdef CONFIG_CPU_RK3399
 #define VA_DMA_ADDR_FIXUP
-#endif
+//#endif
 
 
 static void xtrx_writel(struct xtrx_dev *dev, unsigned int off, unsigned int value)
@@ -192,7 +192,7 @@ static unsigned int xtrx_readl(struct xtrx_dev *dev, unsigned int off)
 	return be32_to_cpu(ioread32((void __iomem *)((unsigned long)dev->bar0_addr + 4*off)));
 }
 
-static int xtrx_power_op(struct xtrx_dev *dev, int on, unsigned mask) 
+static int xtrx_power_op(struct xtrx_dev *dev, int on, unsigned mask)
 {
 	unsigned long flags;
 
@@ -200,7 +200,7 @@ static int xtrx_power_op(struct xtrx_dev *dev, int on, unsigned mask)
 	spin_lock_irqsave(&dev->slock, flags);
 	if (on) {
 		if (dev->pwr_msk == 0) {
-			do_pwr_op = 1; 
+			do_pwr_op = 1;
 		}
 		dev->pwr_msk |= mask;
 	} else {
@@ -1286,7 +1286,7 @@ static int xtrx_probe(struct pci_dev *pdev,
 				dev_err(&pdev->dev, "Failed to register SINGLE MSI.\n");
 				err = -ENODEV;
 				goto err_msi;
-			}	
+			}
 		} else {
 			dev_err(&pdev->dev, "Failed to enable MSI, falling back to legacy mode.\n");
 			xtrxdev->inttype = XTRX_LEGACY;
@@ -1546,4 +1546,3 @@ static void __exit xtrx_cleanup(void)
 
 module_init(xtrx_init);
 module_exit(xtrx_cleanup);
-
