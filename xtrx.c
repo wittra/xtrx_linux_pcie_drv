@@ -40,6 +40,7 @@
 #include <linux/pps_kernel.h>
 #include <linux/version.h>
 #include <linux/slab.h>
+#include <linux/dma-direct.h>
 #include <asm/page.h>
 #include <asm/io.h>
 #include <asm/uaccess.h>
